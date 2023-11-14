@@ -16,11 +16,11 @@ Alternative installation is possible without local dependencies relying on [Dock
 
 Clone the repository
 
-    git clone https://github.com/vivek0460/Devon.git
+    git clone https://github.com/vivek0460/devon.git
 
 Switch to the repo folder
 
-    cd Devon
+    cd devon
 
 Install all the dependencies using composer
 
