@@ -1,0 +1,130 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your super  ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://devon.localhost"
+        }
+    ],
+    "paths": {
+        "/api/v1/products": {
+            "get": {
+                "summary": "get product listing with filter feature",
+                "operationId": "7ca3593d05653d957ae7be1ac648ca44",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/products/1": {
+            "get": {
+                "summary": "get product details",
+                "operationId": "291ba402b0fe202a331c62191c890d91",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/products/filters": {
+            "get": {
+                "summary": "get product filters details",
+                "operationId": "7db7d67480381731f45990e475b480c8",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/products/similar-items?product_id=2": {
+            "get": {
+                "summary": "get product similar products",
+                "operationId": "3a70693f9946e8e52e008065a546a2f5",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/review/submit-review": {
+            "post": {
+                "summary": "Submit review for product",
+                "operationId": "5b390f37c5daad52442ec66475d199a6",
+                "parameters": [
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "User unique ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "product_id",
+                        "in": "query",
+                        "description": "Review for product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "rating",
+                        "in": "query",
+                        "description": "Rating value from 1 to 5",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "review",
+                        "in": "query",
+                        "description": "Review",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Review added"
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    }
+                }
+            }
+        }
+    }
+}

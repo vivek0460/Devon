@@ -9,6 +9,15 @@ use App\Models\Category;
 use App\Http\Requests\ValidateReviewRequest;
 
 class ProductController extends Controller {
+ 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/products",
+     *     summary="get product listing with filter feature",
+     *     @OA\Response(response="200", description="Success"),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
     public function index(Request $request) {
         $products = Product::with(['images', 'reviews', 'category']);
 
@@ -29,17 +38,19 @@ class ProductController extends Controller {
         
         return response()->json($products);
     }
-
-    public function store(Request $request) {
-        $product = new Product(['name' => $request->input('name'), 'detail' => $request->input('detail') ]);
-        $product->save();
-        return response()->json('Product created!');
-    }
-
+  
+    /**
+     * @OA\Get(
+     *     path="/api/v1/products/1",
+     *     summary="get product details",
+     *     @OA\Response(response="200", description="Success"),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
     public function show($id) {
         $product = Product::with(['images', 'reviews', 'category'])->find($id);
 
-        if(count($product->reviews) > 0) {
+        if($product && count($product->reviews) > 0) {
 
             $totalrating = collect($product->reviews)->pluck('rating')->toArray();
             $product->totalrating = array_sum($totalrating)/count($product->reviews); 
@@ -48,18 +59,14 @@ class ProductController extends Controller {
         return response()->json($product);
     }
 
-    public function update($id, Request $request) {
-        $product = Product::find($id);
-        $product->update($request->all());
-        return response()->json('Product updated!');
-    }
-    
-    public function destroy($id) {
-        $product = Product::find($id);
-        $product->delete();
-        return response()->json('Product deleted!');
-    }
-
+    /**
+     * @OA\Get(
+     *     path="/api/v1/products/filters",
+     *     summary="get product filters details",
+     *     @OA\Response(response="200", description="Success"),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
     public function getFilter() { 
         $data['price_min'] = Product::min('price');
         $data['price_max'] = Product::max('price');
@@ -68,6 +75,14 @@ class ProductController extends Controller {
         return response()->json($data);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/products/similar-items?product_id=2",
+     *     summary="get product similar products",
+     *     @OA\Response(response="200", description="Success"),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
     public function similarItems(Request $request) {
 
         $category_id = $request->category_id;
@@ -75,10 +90,45 @@ class ProductController extends Controller {
         $products = Product::with(['images', 'reviews'])->where('category_id', $category_id);
         $products = $products->get();
         
-        return response()->json($products);
-
+        return response()->json($products); 
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/v1/review/submit-review",
+     *     summary="Submit review for product",
+     *     @OA\Parameter(
+     *         name="client_id",
+     *         in="query",
+     *         description="User unique ID",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="product_id",
+     *         in="query",
+     *         description="Review for product",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="rating",
+     *         in="query",
+     *         description="Rating value from 1 to 5",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="review",
+     *         in="query",
+     *         description="Review",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response="201", description="Review added"),
+     *     @OA\Response(response="422", description="Validation errors")
+     * )
+     */
     public function submitReview(ValidateReviewRequest $request) {
   
         $productreview = ProductReview::where('client_id', $request->client_id)

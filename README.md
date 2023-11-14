@@ -26,6 +26,10 @@ Install all the dependencies using composer
 
     composer install
 
+Install all the dependencies using npm
+
+    npm install
+
 Copy the example env file and make the required configuration changes in the .env file
 
     cp .env.example .env
@@ -46,7 +50,19 @@ Start the local development server
 
     php artisan serve
 
-You can now access the server at http://localhost:8000
+Or setup nginx/apache config for subdomain setup on localhost like devon.localhost
+
+    http://devon.localhost
+
+Start npm to run vuejs
+
+    npm run watch
+
+Run the test cases
+
+    php artisan test
+
+You can now access the server at http://devon.localhost
 
 **TL;DR command list**
 
@@ -79,7 +95,7 @@ Run the database seeder and you're done
     php artisan migrate:refresh
     
   
-The api can be accessed at [http://localhost:8000/api](http://localhost:8000/api).
+The api can be accessed at [http://devon.localhost/api](http://devon.localhost/api).
 
 ## API Specification
 
@@ -126,7 +142,11 @@ Run the laravel development server
 
 The api can now be accessed at
 
-    http://localhost:8000/api
+    http://devon.localhost/api
+
+Swagger API documentation
+    
+    http://devon.localhost/api/documentation#/default
 
 Request headers
 
@@ -156,3 +176,6 @@ This applications has CORS enabled by default on all API endpoints. The default 
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 - https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
 - https://www.w3.org/TR/cors
+
+# Repo pattern
+Not used in this application, but we can create contract class and abstract classes in case we are working on real application
