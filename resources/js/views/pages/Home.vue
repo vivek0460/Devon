@@ -102,7 +102,7 @@
 									<div class="card-body">
 										<div class="row">
 											<div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
-												<div class="bg-image rounded ripple-surface">
+												<div v-if="product.images[0]" class="bg-image rounded ripple-surface">
 													<img :src="product.images[0].image"
 													class="w-100" />
 													<div class="hover-overlay">

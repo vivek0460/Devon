@@ -46,6 +46,10 @@ Setup nginx/apache config for subdomain setup on localhost like devon.localhost
 
     http://devon.localhost
 
+Set proper permission to storage dir
+
+    sudo chmod -R 0777 storage
+
 Start npm to run vuejs
 
     npm run watch

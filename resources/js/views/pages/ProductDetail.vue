@@ -172,7 +172,7 @@
 							<div class="card-body">
 								<h5 class="card-title">Similar items</h5>
 								<div @click="redirectToDetail(product.id)" class="d-flex mb-3" v-for="product in similarItems" key="product.id"> 
-									<img :src="product.images[0].image" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" /> 
+									<img v-if="product.images[0]" :src="product.images[0].image" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" /> 
 									<div class="info">
 										<a href="#" class="nav-link mb-1">
 											{{product.name}}
