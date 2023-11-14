@@ -67,16 +67,11 @@ You can now access the server at http://devon.localhost
     
 **Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
 
-    php artisan migrate
-    php artisan serve
+    php artisan migrate 
 
 ## Database seeding
 
-**Populate the database with seed data with relationships which includes users, articles, comments, tags, favorites and follows. This can help you to quickly start testing the api or couple a frontend and start using it with ready content.**
-
-Open the DummyDataSeeder and set the property values as per your requirement
-
-    database/seeds/DummyDataSeeder.php
+**Populate the database with seed data with relationships which includes users, products, categories, product_images etc This can help you to quickly start testing the api or couple a frontend and start using it with ready content.**
 
 Run the database seeder and you're done
 
@@ -87,13 +82,13 @@ Run the database seeder and you're done
     php artisan migrate:refresh
     
   
-The api can be accessed at [http://devon.localhost/api](http://devon.localhost/api).
+The api can be accessed at [http://devon.localhost/api/v1](http://devon.localhost/api/v1).
 
 ## API Specification
 
-This application adheres to the api specifications set by the [Thinkster](https://github.com/vivek0460) team. This helps mix and match any backend with any other frontend without conflicts.
+This application adheres to the api specifications set by the [Vivek0460](https://github.com/vivek0460) team. This helps mix and match any backend with any other frontend without conflicts.
   
-More information regarding the project can be found here https://github.com/vivek0460/Devon.git
+More information regarding the project can be found here https://github.com/vivek0460/devon.git
 
 ----------
 
@@ -101,13 +96,13 @@ More information regarding the project can be found here https://github.com/vive
 
 ## Dependencies
 
-- [jwt-auth](https://github.com/tymondesigns/jwt-auth) - For authentication using JSON Web Tokens
+- [darkaonline/l5-swagger](https://zircote.github.io/swagger-php) - For Swagger
 - [laravel-cors](https://github.com/barryvdh/laravel-cors) - For handling Cross-Origin Resource Sharing (CORS)
 
 ## Folders
 
 - `app` - Contains all the Eloquent models
-- `app/Http/Controllers/Api` - Contains all the api controllers
+- `app/Http/Controllers/ProductCOntroller` - Contains all the api controllers for products
 - `app/Http/Middleware` - Contains the JWT auth middleware
 - `app/Http/Requests` - Contains all the api form requests
 - `config` - Contains all the application configuration files
@@ -130,7 +125,7 @@ More information regarding the project can be found here https://github.com/vive
 
 Run the laravel development server
 
-    php artisan serve
+    php artisan test
 
 The api can now be accessed at
 
@@ -151,13 +146,13 @@ Request headers
 Refer the [api specification](#api-specification) for more info.
 
 ----------
- 
+# Repo pattern
+Not used in this application, but we can create contract class and abstract classes in case we are working on real application
+
+
 # Authentication
  
-This applications uses JSON Web Token (JWT) to handle authentication. The token is passed with each request using the `Authorization` header with `Token` scheme. The JWT authentication middleware handles the validation and authentication of the token. Please check the following sources to learn more about JWT.
- 
-- https://jwt.io/introduction/
-- https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html
+No Auth Needed for current requirments
 
 ----------
 
@@ -169,5 +164,3 @@ This applications has CORS enabled by default on all API endpoints. The default 
 - https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
 - https://www.w3.org/TR/cors
 
-# Repo pattern
-Not used in this application, but we can create contract class and abstract classes in case we are working on real application
